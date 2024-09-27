@@ -1,0 +1,64 @@
+.channel-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    /* Increased gap for better spacing */
+    margin-bottom: 20px;
+}
+
+.channel-item {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+  }
+  
+  .channel-item img {
+    width: 100px;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .channel-item .subscriber-count {
+    font-size: 14px;
+    color: #666;
+  }
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.pagination button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+
+
+.sort-button {
+    background-color: #FF0000;
+    /* YouTube Red */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 20px;
+}
+
+.sort-button:hover {
+    background-color: #CC0000;
+    /* Darker red on hover */
+}
