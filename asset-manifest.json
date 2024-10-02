@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/CreatorTube/static/css/main.2bf9263f.css",
+    "main.js": "/CreatorTube/static/js/main.90ac379f.js",
+    "static/js/453.ef2549ee.chunk.js": "/CreatorTube/static/js/453.ef2549ee.chunk.js",
+    "index.html": "/CreatorTube/index.html",
+    "main.2bf9263f.css.map": "/CreatorTube/static/css/main.2bf9263f.css.map",
+    "main.90ac379f.js.map": "/CreatorTube/static/js/main.90ac379f.js.map",
+    "453.ef2549ee.chunk.js.map": "/CreatorTube/static/js/453.ef2549ee.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2bf9263f.css",
+    "static/js/main.90ac379f.js"
+  ]
+}
