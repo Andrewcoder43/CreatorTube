@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/CreatorTube/static/css/main.2bf9263f.css",
-    "main.js": "/CreatorTube/static/js/main.90ac379f.js",
+    "main.css": "/CreatorTube/static/css/main.e3f5bd92.css",
+    "main.js": "/CreatorTube/static/js/main.6ce66051.js",
     "static/js/453.ef2549ee.chunk.js": "/CreatorTube/static/js/453.ef2549ee.chunk.js",
     "index.html": "/CreatorTube/index.html",
-    "main.2bf9263f.css.map": "/CreatorTube/static/css/main.2bf9263f.css.map",
-    "main.90ac379f.js.map": "/CreatorTube/static/js/main.90ac379f.js.map",
+    "main.e3f5bd92.css.map": "/CreatorTube/static/css/main.e3f5bd92.css.map",
+    "main.6ce66051.js.map": "/CreatorTube/static/js/main.6ce66051.js.map",
     "453.ef2549ee.chunk.js.map": "/CreatorTube/static/js/453.ef2549ee.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2bf9263f.css",
-    "static/js/main.90ac379f.js"
+    "static/css/main.e3f5bd92.css",
+    "static/js/main.6ce66051.js"
   ]
 }
