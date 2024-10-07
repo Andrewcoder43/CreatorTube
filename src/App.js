@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import YouTubeChannelList from "./YoutubeChannelList"; // Adjust the path as needed
-import RandomVideoGenerator from "./RandomVideoGenerator"; // Import the new component
+import YouTubeChannelList from "./components/YoutubeChannelList"; // Adjust the path as needed
+import RandomVideoGenerator from "./components/RandomVideoGenerator"; // Import the new component
 
 
 const App = () => {
