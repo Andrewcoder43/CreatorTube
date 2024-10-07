@@ -160,8 +160,7 @@ const App = () => {
             element={
               <>
                 <h1>CreatorTube</h1>
-                <h2>Welcome to CreatorTube</h2>
-                <p>Discover and explore content from various YouTube creators</p>
+                <p>Discover and explore content from various SolarPunk themed YouTube creators</p>
                 <YouTubeChannelList apiKey={apiKey} channelIds={channelIds} />
               </>
             }
