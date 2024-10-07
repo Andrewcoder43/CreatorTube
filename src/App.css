@@ -4,21 +4,21 @@
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
-  }
-  
-  nav {
+}
+
+nav {
     margin-bottom: 20px;
-  }
-  
-  nav ul {
+}
+
+nav ul {
     list-style-type: none;
     padding: 0;
     display: flex;
     justify-content: center;
     gap: 20px;
-  }
-  
-  nav a {
+}
+
+nav a {
     text-decoration: none;
     color: blue;
-  }
+}
