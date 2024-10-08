@@ -12,18 +12,18 @@
     text-align: center;
     width: 50%;
     margin: 0 auto;
-  }
-  
-  .channel-item img {
+}
+
+.channel-item img {
     width: 100px;
     height: auto;
     margin-right: 10px;
-  }
-  
-  .channel-item .subscriber-count {
+}
+
+.channel-item .subscriber-count {
     font-size: 14px;
     color: #666;
-  }
+}
 
 .pagination {
     text-align: center;
