@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import './YoutubeChannelList.css';
 
-const BATCH_SIZE = 50;
-const CHANNELS_PER_PAGE = 25;
-
-
 const YouTubeChannelList = ({ apiKey, channelIds }) => {
     const [channels, setChannels] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [sortOrder, setSortOrder] = useState('asc');
-
+    const channelsPerPage = 25;
 
     // Cache to store fetched channel data
     const channelCache = new Map();
 
-    const fetchBatchOfChannels = async (batchIds) => {
+    const fetchChannels = async (batchIds) => {
         try {
             const response = await fetch(
                 `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${batchIds}&key=${apiKey}`
@@ -26,7 +22,7 @@ const YouTubeChannelList = ({ apiKey, channelIds }) => {
                 if (errorData.error.code === 403 && errorData.error.message.includes('quota exceeded')) {
                     // Quota exceeded error, retry after a short delay
                     await new Promise((resolve) => setTimeout(resolve, 1000));
-                    return fetchBatchOfChannels(batchIds);
+                    return fetchChannels(batchIds);
                 } else {
                     throw new Error(`Failed to fetch channels. Error: ${JSON.stringify(errorData)}`);
                 }
@@ -39,37 +35,40 @@ const YouTubeChannelList = ({ apiKey, channelIds }) => {
         }
     };
 
+    useEffect(() => {
+        const fetchAllChannels = async () => {
+            try {
+                const batchSize = 50; // Maximum number of IDs per request
+                const fetchedChannels = [];
 
+                for (let i = 0; i < channelIds.length; i += batchSize) {
+                    const batchIds = channelIds.slice(i, i + batchSize).join(',');
 
-    const fetchAllChannels = async () => {
-        try {
-            const fetchedChannels = [];
-            for (let i = 0; i < channelIds.length; i += BATCH_SIZE) {
-                const batchIds = channelIds.slice(i, i + BATCH_SIZE).join(',');
-                if (channelCache.has(batchIds)) {
-                    fetchedChannels.push(...channelCache.get(batchIds));
-                } else {
-                    try {
-                        const channels = await fetchBatchOfChannels(batchIds);
-                        fetchedChannels.push(...channels);
-                        channelCache.set(batchIds, channels);
-                    } catch (error) {
-                        console.error(`Error fetching channels for batch starting at index ${i}:`, error);
+                    // Check cache before making API call
+                    if (channelCache.has(batchIds)) {
+                        fetchedChannels.push(...channelCache.get(batchIds));
+                    } else {
+                        try {
+                            const channels = await fetchChannels(batchIds);
+                            fetchedChannels.push(...channels);
+                            // Store in cache
+                            channelCache.set(batchIds, channels);
+                        } catch (error) {
+                            console.error(`Error fetching channels for batch starting at index ${i}:`, error);
+                        }
                     }
                 }
-            }
-            setChannels(fetchedChannels);
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
 
-    useEffect(() => {
+                setChannels(fetchedChannels);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
         fetchAllChannels();
     }, [apiKey, channelIds]);
-
 
     const indexOfLastChannel = currentPage * channelsPerPage;
     const indexOfFirstChannel = indexOfLastChannel - channelsPerPage;
