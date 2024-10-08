@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './YoutubeChannelList.css';
 
 const YouTubeChannelList = ({ apiKey, channelIds }) => {
@@ -7,10 +7,10 @@ const YouTubeChannelList = ({ apiKey, channelIds }) => {
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [sortOrder, setSortOrder] = useState('asc');
-    const channelsPerPage = 25;
+    const channelsPerPage = 25; // Now properly defined
 
     // Cache to store fetched channel data
-    const channelCache = new Map();
+    const channelCache = useMemo(() => new Map(), []);
 
     const fetchChannels = async (batchIds) => {
         try {
@@ -68,18 +68,21 @@ const YouTubeChannelList = ({ apiKey, channelIds }) => {
         };
 
         fetchAllChannels();
-    }, [apiKey, channelIds]);
+    }, [apiKey, channelIds, channelCache]);
 
-    const indexOfLastChannel = currentPage * channelsPerPage;
-    const indexOfFirstChannel = indexOfLastChannel - channelsPerPage;
+    const sortedChannels = useMemo(() => {
+        return [...channels].sort((a, b) => {
+            const countA = parseInt(a.statistics.subscriberCount, 10) || 0;
+            const countB = parseInt(b.statistics.subscriberCount, 10) || 0;
+            return sortOrder === 'asc' ? countA - countB : countB - countA;
+        });
+    }, [channels, sortOrder]);
 
-    const sortedChannels = [...channels].sort((a, b) => {
-        const countA = parseInt(a.statistics.subscriberCount, 10) || 0;
-        const countB = parseInt(b.statistics.subscriberCount, 10) || 0;
-        return sortOrder === 'asc' ? countA - countB : countB - countA;
-    });
-
-    const currentChannels = sortedChannels.slice(indexOfFirstChannel, indexOfLastChannel);
+    const currentChannels = useMemo(() => {
+        const indexOfLastChannel = currentPage * channelsPerPage;
+        const indexOfFirstChannel = indexOfLastChannel - channelsPerPage;
+        return sortedChannels.slice(indexOfFirstChannel, indexOfLastChannel);
+    }, [currentPage, sortedChannels, channelsPerPage]);
 
     const totalPages = Math.ceil(channels.length / channelsPerPage);
 
