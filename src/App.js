@@ -4,7 +4,7 @@ import YouTubeChannelList from "./components/YoutubeChannelList";
 import RandomVideoGenerator from "./components/RandomVideoGenerator";
 import './App.css';
 
-const apiKey = "AIzaSyAiYrrgQImSbs7Bf7JmnhbULjAaoT1wYKE";
+const apiKey = "";
 const channelIds = [
   "UCebC4x5l2-PQxg46Ucv9CsA",
   "UCSiDGb0MnHFGjs4E2WKvShw",
